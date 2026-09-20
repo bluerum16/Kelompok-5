@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To Do List</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
@@ -15,10 +15,10 @@
       <div class="shape shape-1">★</div>
       <div class="shape shape-2">●</div>
       <div class="shape shape-3">▲</div>
-      
+
       <!-- Interactive Dot Grid Canvas -->
       <canvas id="dot-grid-canvas"></canvas>
-      
+
       <!-- Neobot Mascot -->
       <div class="neobot">
         <svg width="150" height="180" viewBox="0 0 150 180" xmlns="http://www.w3.org/2000/svg">
@@ -27,28 +27,28 @@
           <rect x="46" y="26" width="70" height="50" rx="4" fill="#000" />
           <rect x="14" y="74" width="20" height="40" rx="4" fill="#000" />
           <rect x="124" y="74" width="20" height="40" rx="4" fill="#000" />
-          
+
           <!-- Body -->
-          <rect x="30" y="50" width="90" height="90" rx="8" fill="#3b82f6" stroke="#000" stroke-width="5"/>
-          
+          <rect x="30" y="50" width="90" height="90" rx="8" fill="#3b82f6" stroke="#000" stroke-width="5" />
+
           <!-- Head -->
-          <rect x="40" y="20" width="70" height="50" rx="4" fill="#a855f7" stroke="#000" stroke-width="5"/>
-          
+          <rect x="40" y="20" width="70" height="50" rx="4" fill="#a855f7" stroke="#000" stroke-width="5" />
+
           <!-- Antenna -->
-          <line x1="75" y1="20" x2="75" y2="5" stroke="#000" stroke-width="5"/>
-          <circle cx="75" cy="5" r="5" fill="#ef4444" stroke="#000" stroke-width="3"/>
-          
+          <line x1="75" y1="20" x2="75" y2="5" stroke="#000" stroke-width="5" />
+          <circle cx="75" cy="5" r="5" fill="#ef4444" stroke="#000" stroke-width="3" />
+
           <!-- Eyes -->
-          <circle class="eye" cx="55" cy="45" r="7" fill="#fff" stroke="#000" stroke-width="4"/>
-          <circle class="eye" cx="95" cy="45" r="7" fill="#fff" stroke="#000" stroke-width="4"/>
-          
+          <circle class="eye" cx="55" cy="45" r="7" fill="#fff" stroke="#000" stroke-width="4" />
+          <circle class="eye" cx="95" cy="45" r="7" fill="#fff" stroke="#000" stroke-width="4" />
+
           <!-- Screen/Mouth Area -->
-          <rect x="45" y="70" width="60" height="50" rx="4" fill="#fff" stroke="#000" stroke-width="5"/>
-          <path d="M 55 95 Q 75 110 95 95" stroke="#000" stroke-width="5" stroke-linecap="round" fill="none"/>
-          
+          <rect x="45" y="70" width="60" height="50" rx="4" fill="#fff" stroke="#000" stroke-width="5" />
+          <path d="M 55 95 Q 75 110 95 95" stroke="#000" stroke-width="5" stroke-linecap="round" fill="none" />
+
           <!-- Arms -->
-          <rect x="10" y="70" width="20" height="40" rx="4" fill="#fde047" stroke="#000" stroke-width="5"/>
-          <rect x="120" y="70" width="20" height="40" rx="4" fill="#fde047" stroke="#000" stroke-width="5"/>
+          <rect x="10" y="70" width="20" height="40" rx="4" fill="#fde047" stroke="#000" stroke-width="5" />
+          <rect x="120" y="70" width="20" height="40" rx="4" fill="#fde047" stroke="#000" stroke-width="5" />
         </svg>
       </div>
     </div>
@@ -57,10 +57,10 @@
       <h1>📋 My To Do List</h1>
 
       <!-- Group Bar -->
-      <div class="group-bar" id="group-bar">
+      <!-- <div class="group-bar" id="group-bar">
         <button class="group-btn active" data-group-id="1">Umum</button>
         <button id="add-group" type="button" class="group-btn">+ Group</button>
-      </div>
+      </div> -->
 
       <form id="task-form" class="task-form">
         <input type="text" id="task-input" class="task-input" placeholder="Mau ngapain hari ini?" autocomplete="off" />
@@ -90,7 +90,7 @@
       </ul>
 
       <!-- Pagination Controls -->
-      <div class="pagination" id="pagination" style="display: none;">
+      <div class="pagination" id="pagination" style="display: none">
         <button id="prev-page" class="page-btn">← Prev</button>
         <span id="page-info" class="page-info">Page 1 of 1</span>
         <button id="next-page" class="page-btn">Next →</button>
@@ -111,9 +111,7 @@
         <span id="task-counter">0 task tersisa</span>
         <button id="clear-completed">Hapus yang Selesai</button>
       </div>
-
-    
-  </main>
+    </main>
 
     <script src="js/app.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
