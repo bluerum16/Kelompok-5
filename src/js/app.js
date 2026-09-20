@@ -23,6 +23,12 @@ let nextId = 1;
 function renderTasks() {
   taskList.innerHTML = "";
 
+  const activeTasksCount = tasks.filter(t => !t.completed).length;
+  const counterElement = document.getElementById('task-counter');
+  if (counterElement) {
+    counterElement.textContent = `${activeTasksCount} task tersisa`;
+  } //task 5, ditaro diatas biar kalo daftar tasknya kosong, counternya akan ke update
+
   if (tasks.length === 0) {
     const emptyState = document.createElement("li");
     emptyState.className = "empty-state";
@@ -65,6 +71,7 @@ function renderTasks() {
   // TODO (Fitur #5 - Counter):
   // Update elemen #task-counter di sini setiap kali renderTasks() dipanggil,
   // isinya jumlah task yang belum selesai. Contoh: "3 task tersisa".
+  
 
   // TODO (Fitur #4 - Simpan ke localStorage):
   // Setiap kali renderTasks() dipanggil, data "tasks" sudah berubah,
