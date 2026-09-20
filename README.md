@@ -377,7 +377,7 @@ fitur yang berhasil dibuat. Bobot penilaian yang disarankan:
 - [x] Seluruh merge ke `dev`/`main` dilakukan melalui Pull Request, bukan
       commit langsung.
 - [x] README diperbarui apabila terdapat perubahan struktur folder/fitur.
-- [ ] Proyek dapat dijalankan cukup dengan membuka `src/index.html`.
+- [x] Proyek dapat dijalankan cukup dengan membuka `src/index.html`.
 - [x] Pull Request pengumpulan tugas dari fork kelompok ke repo starter ini
       sudah diajukan, dengan judul sesuai nama kelompok (misalnya
       `Kelompok 1`).
