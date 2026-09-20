@@ -52,9 +52,28 @@ function renderTasks() {
     span.textContent = task.text;
 
     // TODO (Fitur #2 - Edit Task):
-    // Tambahkan tombol "Edit" di sini. Saat diklik, ganti `span`
-    // menjadi <input> berisi teks task supaya bisa diubah,
-    // lalu simpan perubahannya saat user menekan Enter / klik Save.
+    const editBtn = document.createElement("button");
+    editBtn.className = "edit-btn";
+    editBtn.textContent = "✎";
+    editBtn.addEventListener("click", () => {
+      const input = document.createElement("input");
+      input.type = "text";
+      input.value = task.text;
+      input.className = "edit-input";
+      
+      li.replaceChild(input, span);
+      input.focus();
+      
+      input.addEventListener("keyup", (e) => {
+        if (e.key === "Enter") {
+          editTask(task.id, input.value);
+        }
+      });
+      
+      input.addEventListener("blur", () => {
+        editTask(task.id, input.value);
+      });
+    });
 
     const deleteBtn = document.createElement("button");
     deleteBtn.className = "delete-btn";
@@ -63,6 +82,7 @@ function renderTasks() {
 
     li.appendChild(checkbox);
     li.appendChild(span);
+    li.appendChild(editBtn);
     li.appendChild(deleteBtn);
     taskList.appendChild(li);
   });
@@ -105,8 +125,16 @@ function toggleComplete(id) {
 }
 
 // TODO (Fitur #2 - Edit Task):
-// Buat function editTask(id, newText) yang mengubah task.text
-// untuk task dengan id yang cocok, lalu panggil renderTasks().
+function editTask(id, newText) {
+  const trimmed = newText.trim();
+  if (trimmed === "") return;
+
+  const task = tasks.find((t) => t.id === id);
+  if (task) {
+    task.text = trimmed;
+    renderTasks();
+  }
+}
 
 // TODO (Fitur #6 - Clear Completed):
 // Buat function clearCompleted() yang menghapus semua task dengan
