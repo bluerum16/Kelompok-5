@@ -10,12 +10,20 @@ const taskList = document.getElementById("task-list");
 const clearCompletedBtn = document.getElementById("clear-completed");
 const filterButtons = document.querySelectorAll(".filter-btn");
 
+// DOM Pagination
+const paginationContainer = document.getElementById("pagination");
+const prevBtn = document.getElementById("prev-page");
+const nextBtn = document.getElementById("next-page");
+const pageInfo = document.getElementById("page-info");
+
 // Struktur satu task: { id, text, completed }
 // NOTE: "completed" sudah disiapkan di data model, tapi belum
 // dipakai di mana pun. Itu tugas kamu di Fitur #1.
 let tasks = [];
 let nextId = 1;
 let currentFilter = "all";
+let currentPage = 1;
+const tasksPerPage = 5;
 
 // TODO (Fitur #4 - Simpan ke localStorage):
 // Saat aplikasi pertama kali dibuka, load "tasks" dari localStorage
@@ -67,6 +75,21 @@ function renderTasks() {
     return true;
   });
 
+  const totalPages = Math.ceil(filteredTasks.length / tasksPerPage) || 1;
+  if (currentPage > totalPages) {
+    currentPage = totalPages;
+  }
+
+  // Update Pagination UI
+  if (filteredTasks.length > tasksPerPage) {
+    paginationContainer.style.display = "flex";
+    pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+    prevBtn.disabled = currentPage === 1;
+    nextBtn.disabled = currentPage === totalPages;
+  } else {
+    paginationContainer.style.display = "none";
+  }
+
   if (filteredTasks.length === 0) {
     const emptyState = document.createElement("li");
     emptyState.className = "empty-state";
@@ -78,7 +101,12 @@ function renderTasks() {
     return;
   }
 
-  filteredTasks.forEach((task) => {
+  const paginatedTasks = filteredTasks.slice(
+    (currentPage - 1) * tasksPerPage,
+    currentPage * tasksPerPage
+  );
+
+  paginatedTasks.forEach((task) => {
     const li = document.createElement("li");
     li.className = "task-item";
     li.dataset.id = task.id;
@@ -97,8 +125,8 @@ function renderTasks() {
 
     // TODO (Fitur #2 - Edit Task):
     const editBtn = document.createElement("button");
-    editBtn.className = "edit-btn";
-    editBtn.textContent = "✎";
+    editBtn.className = "btn edit-btn";
+    editBtn.innerHTML = "✎";
     editBtn.addEventListener("click", () => {
       const input = document.createElement("input");
       input.type = "text";
@@ -120,14 +148,18 @@ function renderTasks() {
     });
 
     const deleteBtn = document.createElement("button");
-    deleteBtn.className = "delete-btn";
-    deleteBtn.textContent = "✕";
+    deleteBtn.className = "btn delete-btn";
+    deleteBtn.innerHTML = "🗑️";
     deleteBtn.addEventListener("click", () => deleteTask(task.id));
+
+    const actionsDiv = document.createElement("div");
+    actionsDiv.className = "task-actions";
+    actionsDiv.appendChild(editBtn);
+    actionsDiv.appendChild(deleteBtn);
 
     li.appendChild(checkbox);
     li.appendChild(span);
-    li.appendChild(editBtn);
-    li.appendChild(deleteBtn);
+    li.appendChild(actionsDiv);
     taskList.appendChild(li);
   });
 
@@ -149,6 +181,11 @@ function addTask(text) {
     text: trimmed,
     completed: false,
   });
+
+  // Kembali ke halaman pertama setiap menambah task agar kelihatan kalau ditambahkan ke bawah (kalau urutannya descending)
+  // Atau karena kita push ke array akhir, kita bisa lompat ke halaman terakhir:
+  const totalAfterAdd = tasks.length;
+  currentPage = Math.ceil(totalAfterAdd / tasksPerPage) || 1;
 
   renderTasks();
 }
@@ -194,8 +231,30 @@ function clearCompleted() {
 filterButtons.forEach((button) => {
   button.addEventListener("click", () => {
     currentFilter = button.dataset.filter;
+    currentPage = 1; // Reset halaman saat filter berubah
     renderTasks();
   });
+});
+
+// Event Listener Pagination
+prevBtn.addEventListener("click", () => {
+  if (currentPage > 1) {
+    currentPage--;
+    renderTasks();
+  }
+});
+
+nextBtn.addEventListener("click", () => {
+  const filteredTasks = tasks.filter((task) => {
+    if (currentFilter === "active") return !task.completed;
+    if (currentFilter === "completed") return task.completed;
+    return true;
+  });
+  const totalPages = Math.ceil(filteredTasks.length / tasksPerPage) || 1;
+  if (currentPage < totalPages) {
+    currentPage++;
+    renderTasks();
+  }
 });
 
 taskForm.addEventListener("submit", (event) => {
