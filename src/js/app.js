@@ -8,12 +8,14 @@ const taskForm = document.getElementById("task-form");
 const taskInput = document.getElementById("task-input");
 const taskList = document.getElementById("task-list");
 const clearCompletedBtn = document.getElementById("clear-completed");
+const filterButtons = document.querySelectorAll(".filter-btn");
 
 // Struktur satu task: { id, text, completed }
 // NOTE: "completed" sudah disiapkan di data model, tapi belum
 // dipakai di mana pun. Itu tugas kamu di Fitur #1.
 let tasks = [];
 let nextId = 1;
+let currentFilter = "all";
 
 // TODO (Fitur #4 - Simpan ke localStorage):
 // Saat aplikasi pertama kali dibuka, load "tasks" dari localStorage
@@ -32,6 +34,10 @@ if (storedTasks !== null) {
 
 function renderTasks() {
   taskList.innerHTML = "";
+
+  filterButtons.forEach((button) => {
+    button.classList.toggle("active", button.dataset.filter === currentFilter);
+  });
 
   const activeTasksCount = tasks.filter(t => !t.completed).length;
   const counterElement = document.getElementById('task-counter');
@@ -55,7 +61,24 @@ function renderTasks() {
   // TODO (Fitur #3 - Filter Task):
   // Sebelum di-loop, filter dulu "tasks" sesuai filter aktif
   // (semua / aktif / selesai). Sekarang semua task selalu ditampilkan.
-  tasks.forEach((task) => {
+  const filteredTasks = tasks.filter((task) => {
+    if (currentFilter === "active") return !task.completed;
+    if (currentFilter === "completed") return task.completed;
+    return true;
+  });
+
+  if (filteredTasks.length === 0) {
+    const emptyState = document.createElement("li");
+    emptyState.className = "empty-state";
+    emptyState.textContent =
+      currentFilter === "active"
+        ? "Tidak ada task aktif."
+        : "Belum ada task yang selesai.";
+    taskList.appendChild(emptyState);
+    return;
+  }
+
+  filteredTasks.forEach((task) => {
     const li = document.createElement("li");
     li.className = "task-item";
     li.dataset.id = task.id;
@@ -168,6 +191,12 @@ function clearCompleted() {
 // `let currentFilter = "all";`, lalu tambahkan event listener untuk
 // setiap .filter-btn yang mengubah currentFilter dan memanggil
 // renderTasks() ulang.
+filterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    currentFilter = button.dataset.filter;
+    renderTasks();
+  });
+});
 
 taskForm.addEventListener("submit", (event) => {
   event.preventDefault();
