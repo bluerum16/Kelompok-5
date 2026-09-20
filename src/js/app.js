@@ -19,9 +19,24 @@ let nextId = 1;
 // (kalau ada) sebelum renderTasks() dipanggil pertama kali di bawah.
 // Hint: gunakan JSON.parse(localStorage.getItem("tasks")) dan cek
 // null-nya sebelum dipakai.
+const storedTasks = localStorage.getItem("tasks");
+
+if (storedTasks !== null) {
+  tasks = JSON.parse(storedTasks);
+
+  // Sesuaikan ID berikutnya agar tidak bentrok
+  // dengan ID task yang sudah tersimpan.
+  nextId = Math.max(...tasks.map((task) => task.id), 0) + 1;
+}
 
 function renderTasks() {
   taskList.innerHTML = "";
+
+  // TODO (Fitur #4 - Simpan ke localStorage):
+  // Setiap kali renderTasks() dipanggil, data "tasks" sudah berubah,
+  // jadi ini tempat yang pas untuk menyimpan ulang ke localStorage.
+  // Hint: localStorage.setItem("tasks", JSON.stringify(tasks));
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 
   if (tasks.length === 0) {
     const emptyState = document.createElement("li");
@@ -70,16 +85,15 @@ function renderTasks() {
   // TODO (Fitur #5 - Counter):
   // Update elemen #task-counter di sini setiap kali renderTasks() dipanggil,
   // isinya jumlah task yang belum selesai. Contoh: "3 task tersisa".
-
-  // TODO (Fitur #4 - Simpan ke localStorage):
-  // Setiap kali renderTasks() dipanggil, data "tasks" sudah berubah,
-  // jadi ini tempat yang pas untuk menyimpan ulang ke localStorage.
-  // Hint: localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
 function addTask(text) {
   const trimmed = text.trim();
   if (trimmed === "") return;
+
+  // Fitur #4 - Pastikan ID baru tidak bentrok
+  // dengan ID task yang sudah ada.
+  nextId = Math.max(...tasks.map((task) => task.id), 0) + 1;
 
   tasks.push({
     id: nextId++,
@@ -97,7 +111,7 @@ function deleteTask(id) {
 
 // TODO (Fitur #1 - Tandai Selesai):
 function toggleComplete(id) {
-  const task = tasks.find(t => t.id === id);
+  const task = tasks.find((t) => t.id === id);
   if (task) {
     task.completed = !task.completed;
     renderTasks();
