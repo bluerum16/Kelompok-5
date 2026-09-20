@@ -366,7 +366,7 @@ fitur yang berhasil dibuat. Bobot penilaian yang disarankan:
 
 - [x] Pekerjaan dilakukan pada fork repo starter ini, bukan pada repo
       starter secara langsung.
-- [ ] Branch `main` pada fork kelompok berisi versi final (hasil merge dari
+- [x] Branch `main` pada fork kelompok berisi versi final (hasil merge dari
       `dev`).
 - [x] Branch `dev` masih tersedia pada fork kelompok (tidak dihapus) sebagai
       bukti histori pengerjaan.
@@ -378,7 +378,7 @@ fitur yang berhasil dibuat. Bobot penilaian yang disarankan:
       commit langsung.
 - [x] README diperbarui apabila terdapat perubahan struktur folder/fitur.
 - [ ] Proyek dapat dijalankan cukup dengan membuka `src/index.html`.
-- [ ] Pull Request pengumpulan tugas dari fork kelompok ke repo starter ini
+- [x] Pull Request pengumpulan tugas dari fork kelompok ke repo starter ini
       sudah diajukan, dengan judul sesuai nama kelompok (misalnya
       `Kelompok 1`).
 
