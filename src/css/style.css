@@ -108,10 +108,11 @@ h1 {
 
 /*
   TODO (Fitur #1 - Tandai Selesai):
-  Tambahkan style untuk task yang sudah selesai, misalnya class ".completed"
-  pada .task-item yang membuat teksnya dicoret (text-decoration: line-through)
-  dan warnanya lebih pudar.
 */
+.task-item.completed span {
+  text-decoration: line-through;
+  color: #9ca3af;
+}
 
 /*
   TODO (Fitur #2 - Edit Task):
