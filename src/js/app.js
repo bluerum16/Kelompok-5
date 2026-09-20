@@ -32,6 +32,11 @@ if (storedTasks !== null) {
 function renderTasks() {
   taskList.innerHTML = "";
 
+  const activeTasksCount = tasks.filter(t => !t.completed).length;
+  const counterElement = document.getElementById('task-counter');
+  if (counterElement) {
+    counterElement.textContent = `${activeTasksCount} task tersisa`;
+  } //task 5, ditaro diatas biar kalo daftar tasknya kosong, counternya akan ke update
   // TODO (Fitur #4 - Simpan ke localStorage):
   // Setiap kali renderTasks() dipanggil, data "tasks" sudah berubah,
   // jadi ini tempat yang pas untuk menyimpan ulang ke localStorage.
