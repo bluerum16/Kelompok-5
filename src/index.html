@@ -56,9 +56,15 @@
     <main class="app">
       <h1>📋 My To Do List</h1>
 
+      <!-- Group Bar -->
+      <div class="group-bar" id="group-bar">
+        <button class="group-btn active" data-group-id="1">Umum</button>
+        <button id="add-group" type="button" class="group-btn">+ Group</button>
+      </div>
+
       <form id="task-form" class="task-form">
-        <input type="text" id="task-input" placeholder="Mau ngapain hari ini?" autocomplete="off" />
-        <button type="submit">Tambah</button>
+        <input type="text" id="task-input" class="task-input" placeholder="Mau ngapain hari ini?" autocomplete="off" />
+        <button type="submit" class="add-btn">Tambah</button>
       </form>
 
       <!--

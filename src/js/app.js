@@ -125,8 +125,8 @@ function renderTasks() {
 
     // TODO (Fitur #2 - Edit Task):
     const editBtn = document.createElement("button");
-    editBtn.className = "edit-btn";
-    editBtn.textContent = "✎";
+    editBtn.className = "btn edit-btn";
+    editBtn.innerHTML = "✎";
     editBtn.addEventListener("click", () => {
       const input = document.createElement("input");
       input.type = "text";
@@ -148,14 +148,18 @@ function renderTasks() {
     });
 
     const deleteBtn = document.createElement("button");
-    deleteBtn.className = "delete-btn";
-    deleteBtn.textContent = "✕";
+    deleteBtn.className = "btn delete-btn";
+    deleteBtn.innerHTML = "🗑️";
     deleteBtn.addEventListener("click", () => deleteTask(task.id));
+
+    const actionsDiv = document.createElement("div");
+    actionsDiv.className = "task-actions";
+    actionsDiv.appendChild(editBtn);
+    actionsDiv.appendChild(deleteBtn);
 
     li.appendChild(checkbox);
     li.appendChild(span);
-    li.appendChild(editBtn);
-    li.appendChild(deleteBtn);
+    li.appendChild(actionsDiv);
     taskList.appendChild(li);
   });
 
