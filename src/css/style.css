@@ -7,87 +7,109 @@ body {
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   padding: 40px 16px;
-  background: #f2f4f7;
-  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  color: #1f2937;
+  background-color: #fde047;
+  font-family: "Space Grotesk", sans-serif;
+  color: #000;
+  position: relative;
+  overflow-x: hidden;
 }
 
 .app {
   width: 100%;
-  max-width: 480px;
+  max-width: 500px;
   background: #ffffff;
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border: 4px solid #000;
+  border-radius: 8px;
+  padding: 32px 24px;
+  box-shadow: 8px 8px 0px #000;
 }
 
 h1 {
-  margin: 0 0 20px;
-  font-size: 1.5rem;
+  margin: 0 0 24px;
+  font-size: 2rem;
+  font-weight: 700;
   text-align: center;
+  text-transform: uppercase;
+  letter-spacing: -1px;
 }
 
 .task-form {
   display: flex;
-  gap: 8px;
-  margin-bottom: 16px;
+  gap: 12px;
+  margin-bottom: 24px;
 }
 
 .task-form input {
   flex: 1;
-  padding: 10px 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
+  padding: 12px 16px;
+  border: 3px solid #000;
+  border-radius: 4px;
   font-size: 1rem;
+  font-family: inherit;
+  font-weight: 600;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.task-form input:focus {
+  background: #f3f4f6;
+  box-shadow: 4px 4px 0px #000;
+  transform: translate(-2px, -2px);
 }
 
 .task-form button {
-  padding: 10px 16px;
-  border: none;
-  border-radius: 8px;
-  background: #4f46e5;
-  color: #fff;
+  padding: 12px 20px;
+  border: 3px solid #000;
+  border-radius: 4px;
+  background: #ff6b6b; /* Coral Pink */
+  color: #000;
   font-size: 1rem;
+  font-weight: 700;
+  font-family: inherit;
+  text-transform: uppercase;
   cursor: pointer;
+  box-shadow: 4px 4px 0px #000;
+  transition: all 0.1s ease;
 }
 
-.task-form button:hover {
-  background: #4338ca;
+.task-form button:active {
+  box-shadow: 0px 0px 0px #000;
+  transform: translate(4px, 4px);
 }
 
-/*
-  TODO (Fitur #3 - Filter Task):
-  Tambahkan style untuk .filters dan .filter-btn di sini.
-  Tandai tombol filter yang sedang aktif, misalnya dengan class ".active".
-*/
 .filters {
   display: flex;
-  gap: 8px;
-  margin-bottom: 16px;
+  gap: 12px;
+  margin-bottom: 24px;
 }
 
 .filter-btn {
   flex: 1;
-  padding: 8px 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
+  padding: 10px 12px;
+  border: 3px solid #000;
+  border-radius: 4px;
   background: #ffffff;
-  color: #4b5563;
-  font-size: 0.9rem;
+  color: #000;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: inherit;
+  text-transform: uppercase;
   cursor: pointer;
+  box-shadow: 4px 4px 0px #000;
+  transition: all 0.1s ease;
 }
 
-.filter-btn:hover {
-  border-color: #4f46e5;
-  color: #4f46e5;
+.filter-btn:active {
+  box-shadow: 0px 0px 0px #000;
+  transform: translate(4px, 4px);
 }
 
 .filter-btn.active {
-  border-color: #4f46e5;
-  background: #4f46e5;
-  color: #ffffff;
+  background: #c084fc; /* Ungu Neobrutalism */
+  box-shadow: 2px 2px 0px #000;
+  transform: translate(2px, 2px);
 }
 
 .task-list {
@@ -96,102 +118,275 @@ h1 {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 16px;
 }
 
 .task-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 3px solid #000;
+  border-radius: 4px;
+  background: #ffffff;
+  box-shadow: 4px 4px 0px #000;
+  transition: all 0.2s ease;
+}
+
+.task-item:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #000;
+}
+
+/* Custom Checkbox Neobrutalism */
+.task-item input[type="checkbox"] {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 3px solid #000;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.task-item input[type="checkbox"]:checked {
+  background: #4ade80; /* Hijau cerah */
+}
+
+.task-item input[type="checkbox"]:checked::after {
+  content: "✔";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .task-item span {
   flex: 1;
   word-break: break-word;
+  font-weight: 600;
+  font-size: 1.05rem;
+  transition: all 0.2s ease;
 }
 
+.task-item.completed span {
+  text-decoration: line-through;
+  text-decoration-thickness: 3px;
+  color: #6b7280; /* Abu-abu tua */
+}
+
+.task-item .edit-input {
+  flex: 1;
+  padding: 6px 10px;
+  border: 3px solid #000;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: inherit;
+  font-weight: 600;
+  outline: none;
+  background: #fdf2f8; /* Pink sangat pudar */
+}
+
+.task-item .edit-btn,
 .task-item .delete-btn {
-  border: none;
-  background: transparent;
-  color: #ef4444;
+  border: 3px solid #000;
+  border-radius: 4px;
+  background: #fff;
+  color: #000;
   font-size: 1.1rem;
   cursor: pointer;
   line-height: 1;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 2px 0px #000;
+  transition: all 0.1s ease;
 }
 
-.task-item .delete-btn:hover {
-  color: #b91c1c;
+.task-item .edit-btn {
+  background: #60a5fa; /* Biru terang */
+}
+
+.task-item .delete-btn {
+  background: #f87171; /* Merah terang */
+}
+
+.task-item .edit-btn:active,
+.task-item .delete-btn:active {
+  box-shadow: 0px 0px 0px #000;
+  transform: translate(2px, 2px);
 }
 
 .empty-state {
   text-align: center;
-  color: #9ca3af;
-  padding: 16px 0;
-  font-size: 0.9rem;
-}
-
-/*
-  TODO (Fitur #1 - Tandai Selesai):
-*/
-.task-item.completed span {
-  text-decoration: line-through;
-  color: #9ca3af;
-}
-
-/*
-  TODO (Fitur #2 - Edit Task):
-*/
-.task-item .edit-input {
-  flex: 1;
-  padding: 4px 8px;
-  border: 1px solid #4f46e5;
-  border-radius: 4px;
+  color: #000;
+  padding: 24px 0;
   font-size: 1rem;
-  outline: none;
+  font-weight: 600;
+  border: 3px dashed #000;
+  border-radius: 4px;
+  background: #fef08a;
 }
 
-.task-item .edit-btn {
-  border: none;
-  background: transparent;
-  color: #3b82f6;
-  font-size: 1.1rem;
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  gap: 12px;
+}
+
+.page-btn {
+  padding: 8px 16px;
+  border: 3px solid #000;
+  border-radius: 4px;
+  background: #60a5fa; /* Biru terang */
+  color: #000;
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-family: inherit;
+  text-transform: uppercase;
   cursor: pointer;
-  line-height: 1;
+  box-shadow: 4px 4px 0px #000;
+  transition: all 0.1s ease;
 }
 
-.task-item .edit-btn:hover {
-  color: #2563eb;
+.page-btn:active:not(:disabled) {
+  box-shadow: 0px 0px 0px #000;
+  transform: translate(4px, 4px);
 }
 
-/*
-  TODO (Fitur #5 & #6 - Counter & Clear Completed):
-  Tambahkan style untuk .footer yang berisi counter task dan tombol
-  "Hapus yang Selesai".
-*/
+.page-btn:disabled {
+  background: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: translate(4px, 4px);
+}
+
+.page-info {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
 .footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid #e5e7eb;
-  font-size: 0.9rem;
-  color: #4b5563;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 4px solid #000;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #000;
 }
 
 #clear-completed {
-  padding: 8px 12px;
-  border: none;
-  border-radius: 8px;
-  background: #000000;
-  color: #f9f9f9;
+  padding: 10px 16px;
+  border: 3px solid #000;
+  border-radius: 4px;
+  background: #f97316; /* Oranye terang */
+  color: #000;
   font-size: 0.9rem;
+  font-weight: 600;
+  font-family: inherit;
+  text-transform: uppercase;
   cursor: pointer;
+  box-shadow: 4px 4px 0px #000;
+  transition: all 0.1s ease;
 }
 
-#clear-completed:hover {
-  background: #464161;
+#clear-completed:active {
+  box-shadow: 0px 0px 0px #000;
+  transform: translate(4px, 4px);
+}
+
+/* ========================================================
+   Background Decorations (Neobrutalism)
+   ======================================================== */
+
+.decorations {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.shape {
+  position: absolute;
+  font-size: 3rem;
+  color: #fff;
+  text-shadow: 4px 4px 0px #000;
+  -webkit-text-stroke: 2px #000;
+  animation: float 6s ease-in-out infinite;
+}
+
+.shape-1 {
+  top: 15%;
+  left: 10%;
+  animation-delay: 0s;
+  color: #ff6b6b;
+}
+
+.shape-2 {
+  top: 70%;
+  left: 15%;
+  animation-delay: 2s;
+  color: #4ade80;
+}
+
+.shape-3 {
+  top: 25%;
+  right: 15%;
+  animation-delay: 4s;
+  color: #a855f7;
+}
+
+#dot-grid-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.neobot {
+  position: absolute;
+  bottom: 50px;
+  right: 5%;
+  animation: float-bot 4s ease-in-out infinite;
+}
+
+.eye {
+  animation: blink 4s infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(10deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes float-bot {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes blink {
+  0%, 96%, 98% { transform: scaleY(1); }
+  97%, 99% { transform: scaleY(0.1); }
 }
