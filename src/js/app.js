@@ -19,6 +19,15 @@ let nextId = 1;
 // (kalau ada) sebelum renderTasks() dipanggil pertama kali di bawah.
 // Hint: gunakan JSON.parse(localStorage.getItem("tasks")) dan cek
 // null-nya sebelum dipakai.
+const storedTasks = localStorage.getItem("tasks");
+
+if (storedTasks !== null) {
+  tasks = JSON.parse(storedTasks);
+
+  // Sesuaikan ID berikutnya agar tidak bentrok
+  // dengan ID task yang sudah tersimpan.
+  nextId = Math.max(...tasks.map((task) => task.id), 0) + 1;
+}
 
 function renderTasks() {
   taskList.innerHTML = "";
@@ -28,6 +37,11 @@ function renderTasks() {
   if (counterElement) {
     counterElement.textContent = `${activeTasksCount} task tersisa`;
   } //task 5, ditaro diatas biar kalo daftar tasknya kosong, counternya akan ke update
+  // TODO (Fitur #4 - Simpan ke localStorage):
+  // Setiap kali renderTasks() dipanggil, data "tasks" sudah berubah,
+  // jadi ini tempat yang pas untuk menyimpan ulang ke localStorage.
+  // Hint: localStorage.setItem("tasks", JSON.stringify(tasks));
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 
   if (tasks.length === 0) {
     const emptyState = document.createElement("li");
@@ -46,24 +60,49 @@ function renderTasks() {
     li.dataset.id = task.id;
 
     // TODO (Fitur #1 - Tandai Selesai):
-    // Tambahkan <input type="checkbox"> di sini yang mencerminkan
-    // task.completed, dan tambahkan class "completed" pada `li`
-    // kalau task.completed === true.
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = task.completed;
+    checkbox.addEventListener("change", () => toggleComplete(task.id));
+    if (task.completed) {
+      li.classList.add("completed");
+    }
 
     const span = document.createElement("span");
     span.textContent = task.text;
 
     // TODO (Fitur #2 - Edit Task):
-    // Tambahkan tombol "Edit" di sini. Saat diklik, ganti `span`
-    // menjadi <input> berisi teks task supaya bisa diubah,
-    // lalu simpan perubahannya saat user menekan Enter / klik Save.
+    const editBtn = document.createElement("button");
+    editBtn.className = "edit-btn";
+    editBtn.textContent = "✎";
+    editBtn.addEventListener("click", () => {
+      const input = document.createElement("input");
+      input.type = "text";
+      input.value = task.text;
+      input.className = "edit-input";
+      
+      li.replaceChild(input, span);
+      input.focus();
+      
+      input.addEventListener("keyup", (e) => {
+        if (e.key === "Enter") {
+          editTask(task.id, input.value);
+        }
+      });
+      
+      input.addEventListener("blur", () => {
+        editTask(task.id, input.value);
+      });
+    });
 
     const deleteBtn = document.createElement("button");
     deleteBtn.className = "delete-btn";
     deleteBtn.textContent = "✕";
     deleteBtn.addEventListener("click", () => deleteTask(task.id));
 
+    li.appendChild(checkbox);
     li.appendChild(span);
+    li.appendChild(editBtn);
     li.appendChild(deleteBtn);
     taskList.appendChild(li);
   });
@@ -71,17 +110,15 @@ function renderTasks() {
   // TODO (Fitur #5 - Counter):
   // Update elemen #task-counter di sini setiap kali renderTasks() dipanggil,
   // isinya jumlah task yang belum selesai. Contoh: "3 task tersisa".
-  
-
-  // TODO (Fitur #4 - Simpan ke localStorage):
-  // Setiap kali renderTasks() dipanggil, data "tasks" sudah berubah,
-  // jadi ini tempat yang pas untuk menyimpan ulang ke localStorage.
-  // Hint: localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
 function addTask(text) {
   const trimmed = text.trim();
   if (trimmed === "") return;
+
+  // Fitur #4 - Pastikan ID baru tidak bentrok
+  // dengan ID task yang sudah ada.
+  nextId = Math.max(...tasks.map((task) => task.id), 0) + 1;
 
   tasks.push({
     id: nextId++,
@@ -98,12 +135,25 @@ function deleteTask(id) {
 }
 
 // TODO (Fitur #1 - Tandai Selesai):
-// Buat function toggleComplete(id) yang membalik nilai task.completed
-// untuk task dengan id yang cocok, lalu panggil renderTasks().
+function toggleComplete(id) {
+  const task = tasks.find((t) => t.id === id);
+  if (task) {
+    task.completed = !task.completed;
+    renderTasks();
+  }
+}
 
 // TODO (Fitur #2 - Edit Task):
-// Buat function editTask(id, newText) yang mengubah task.text
-// untuk task dengan id yang cocok, lalu panggil renderTasks().
+function editTask(id, newText) {
+  const trimmed = newText.trim();
+  if (trimmed === "") return;
+
+  const task = tasks.find((t) => t.id === id);
+  if (task) {
+    task.text = trimmed;
+    renderTasks();
+  }
+}
 
 // TODO (Fitur #6 - Clear Completed):
 // Buat function clearCompleted() yang menghapus semua task dengan
