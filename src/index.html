@@ -3,58 +3,82 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>To Do List</title>
+    <title>My To Do Board</title>
     <link rel="stylesheet" href="css/style.css" />
   </head>
+
   <body>
-    <main class="app">
-      <h1>📋 My To Do List</h1>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-logo">M</div>
+          <div>
+            <strong>My To Do Board</strong>
+            <span>Ruang untuk rencanamu</span>
+          </div>
+        </div>
 
-      <form id="task-form" class="task-form">
-        <input type="text" id="task-input" placeholder="Mau ngapain hari ini?" autocomplete="off" />
-        <button type="submit">Tambah</button>
-      </form>
+        <div class="sidebar-heading">
+          <span>GRUP SAYA</span>
+        </div>
 
-      <!--
-      TODO (Fitur #3 - Filter Task):
-      Tambahkan 3 tombol filter di sini: "Semua", "Aktif", "Selesai".
-      Lihat README.md bagian "Fitur yang Harus Dibuat" nomor 3 untuk hint lengkap.
+        <div id="group-list" class="group-list"></div>
 
-      Contoh struktur:
-      <div class="filters" id="filters">
-        <button class="filter-btn active" data-filter="all">Semua</button>
-        <button class="filter-btn" data-filter="active">Aktif</button>
-        <button class="filter-btn" data-filter="completed">Selesai</button>
-      </div>
-    -->
-      <div class="filters" id="filters">
-        <button class="filter-btn active" data-filter="all">Semua</button>
-        <button class="filter-btn" data-filter="active">Aktif</button>
-        <button class="filter-btn" data-filter="completed">Selesai</button>
-      </div>
+        <button id="add-group" class="add-group-btn" type="button">
+          <span>＋</span>
+          Tambah grup
+        </button>
 
-      <ul id="task-list" class="task-list">
-        <!-- Task dirender otomatis oleh js/app.js, jangan ditulis manual di sini -->
-      </ul>
+        <div class="sidebar-footer">
+          <span id="group-count">0 grup</span>
+          <span id="total-task-count">0 task</span>
+        </div>
+      </aside>
 
-      <!--
-      TODO (Fitur #5 - Counter & Fitur #6 - Clear Completed):
-      Tambahkan info jumlah task tersisa dan tombol untuk menghapus
-      semua task yang sudah selesai. Lihat README.md nomor 5 dan 6.
+      <main class="board">
+        <header class="board-header">
+          <div class="board-title-wrap">
+            <div>
+              <span class="eyebrow">GRUP AKTIF</span>
+              <h1 id="group-title">My To Do List</h1>
+            </div>
+            <button id="rename-group" class="icon-btn" type="button" title="Ubah nama grup">✎</button>
+          </div>
 
-      Contoh struktur:
-      <div class="footer" id="footer">
-        <span id="task-counter">0 task tersisa</span>
-        <button id="clear-completed">Hapus yang Selesai</button>
-      </div>
-    -->
-      <div class="footer" id="footer">
-        <span id="task-counter">0 task tersisa</span>
-        <button id="clear-completed">Hapus yang Selesai</button>
-      </div>
+          <div class="board-actions">
+            <span class="save-status" id="save-status">● Tersimpan</span>
 
-    
-  </main>
+            <button id="theme-toggle" class="small-btn theme-toggle" type="button" title="Ganti tema">🌙</button>
+
+            <button id="move-group-up" class="small-btn" type="button" title="Naikkan grup">↑</button>
+
+            <button id="move-group-down" class="small-btn" type="button" title="Turunkan grup">↓</button>
+          </div>
+        </header>
+
+        <section class="board-card">
+          <form id="task-form" class="task-form">
+            <input type="text" id="task-input" placeholder="Mau ngapain hari ini?" autocomplete="off" />
+            <button type="submit">Tambah</button>
+          </form>
+
+          <div class="filters" id="filters">
+            <button class="filter-btn active" data-filter="all" type="button">Semua</button>
+            <button class="filter-btn" data-filter="active" type="button">Aktif</button>
+            <button class="filter-btn" data-filter="completed" type="button">Selesai</button>
+          </div>
+
+          <ul id="task-list" class="task-list"></ul>
+
+          <div class="footer" id="footer">
+            <span id="task-counter">0 task tersisa</span>
+            <button id="clear-completed" type="button">Hapus yang Selesai</button>
+          </div>
+        </section>
+
+        <p class="hint">Tips: gunakan tombol ↑ ↓ pada task untuk mengatur urutan. Kamu juga bisa drag task untuk memindahkannya.</p>
+      </main>
+    </div>
 
     <script src="js/app.js"></script>
   </body>
