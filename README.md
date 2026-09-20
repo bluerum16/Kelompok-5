@@ -1,5 +1,44 @@
 # Starter-FP-LBE-2026: To Do List
 
+---
+
+## Kelompok 5
+
+| Nama | NRP | GitHub | Role |
+|---|---|---|---|
+| Fazli Irham Ramadhan Abdillah | 5025251178 | [@bluerum16](https://github.com/bluerum16) | Project Manager |
+| Raihan Ahmad Farraszaki | 5025251263 | [@reyyzz](https://github.com/reyyzz) | Feature Developer |
+| Sayyid Faiz Al Izzuddin | 5025251190 | [@sayyidfaiz](https://github.com/sayyidfaiz) | Feature Developer |
+| Anang Ardhiansyah | 5025251118 | [@ArdhiCode](https://github.com/ArdhiCode) | Feature Developer |
+| Gabriel Mesly Managam Siahaan | 5025251096 | [@Gabriel](https://github.com/Gabriel) | Feature Developer |
+
+### Status Fitur
+
+Keenam fitur wajib pada bagian 6 sudah selesai dan ter-merge ke `dev`.
+
+| # | Fitur | Status | Branch | PR |
+|---|---|---|---|---|
+| 1 | Tandai task selesai | Selesai | `feature/toggle-complete` | [#7](../../pull/7) |
+| 2 | Edit task | Selesai | `feature/edit-task` | [#10](../../pull/10) |
+| 3 | Filter task | Selesai | `fitur/filtertask` | [#12](../../pull/12) |
+| 4 | Simpan ke localStorage | Selesai | `feature/local-storage` | [#9](../../pull/9) |
+| 5 | Counter task tersisa | Selesai | `feature/task-counter` | [#8](../../pull/8) |
+| 6 | Hapus yang selesai | Selesai | `feature/clear-completed` | [#11](../../pull/11) |
+
+Backlog dan papan pengerjaan: [GitHub Projects](https://github.com/users/bluerum16/projects/2)
+
+### Catatan Pengerjaan
+
+- Fitur #4 (localStorage) dan fitur #5 (counter) ditempatkan **sebelum**
+  `return` pada kondisi `tasks.length === 0` di dalam `renderTasks()`. Kalau
+  ditaruh di akhir fungsi, data tidak ikut tersimpan dan counter tidak kembali
+  ke nol saat seluruh task dihapus.
+- Fitur #5 dan #6 sama-sama menambah elemen pada blok `footer`, sehingga
+  sempat terjadi merge conflict yang diselesaikan dengan mempertahankan kedua
+  perubahan.
+
+---
+
 Starter project untuk Final Project **LBE Lab RPL 2026**. Fokus utama tugas
 ini adalah melatih **workflow Git/GitHub yang benar dalam pengerjaan proyek
 secara tim**. Aplikasi yang dibangun sengaja dibuat sederhana (To Do List,
@@ -325,21 +364,21 @@ fitur yang berhasil dibuat. Bobot penilaian yang disarankan:
 
 ## 9. Checklist Sebelum Pengumpulan
 
-- [ ] Pekerjaan dilakukan pada fork repo starter ini, bukan pada repo
+- [x] Pekerjaan dilakukan pada fork repo starter ini, bukan pada repo
       starter secara langsung.
-- [ ] Branch `main` pada fork kelompok berisi versi final (hasil merge dari
+- [x] Branch `main` pada fork kelompok berisi versi final (hasil merge dari
       `dev`).
-- [ ] Branch `dev` masih tersedia pada fork kelompok (tidak dihapus) sebagai
+- [x] Branch `dev` masih tersedia pada fork kelompok (tidak dihapus) sebagai
       bukti histori pengerjaan.
-- [ ] Seluruh fitur pada bagian 6 telah dikerjakan melalui branch `feature/*`
+- [x] Seluruh fitur pada bagian 6 telah dikerjakan melalui branch `feature/*`
       masing-masing.
-- [ ] Terdapat bukti Issues/backlog pada GitHub (screenshot dapat dilampirkan
+- [x] Terdapat bukti Issues/backlog pada GitHub (screenshot dapat dilampirkan
       apabila diminta).
-- [ ] Seluruh merge ke `dev`/`main` dilakukan melalui Pull Request, bukan
+- [x] Seluruh merge ke `dev`/`main` dilakukan melalui Pull Request, bukan
       commit langsung.
-- [ ] README diperbarui apabila terdapat perubahan struktur folder/fitur.
-- [ ] Proyek dapat dijalankan cukup dengan membuka `src/index.html`.
-- [ ] Pull Request pengumpulan tugas dari fork kelompok ke repo starter ini
+- [x] README diperbarui apabila terdapat perubahan struktur folder/fitur.
+- [x] Proyek dapat dijalankan cukup dengan membuka `src/index.html`.
+- [x] Pull Request pengumpulan tugas dari fork kelompok ke repo starter ini
       sudah diajukan, dengan judul sesuai nama kelompok (misalnya
       `Kelompok 1`).
 
